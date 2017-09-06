@@ -50,7 +50,7 @@ Article.fetchAll = function(callback) {
       Article.loadAll(results);
       callback();
     }
-  )
+  ).catch(function(err){console.error(err)});
 };
 
 
@@ -63,7 +63,7 @@ Article.truncateTable = function(callback) {
   .then(function(data) {
     console.log(data);
     if (callback) callback();
-  });
+  }).catch(function(err){console.error(err)});;
 };
 
 Article.prototype.insertRecord = function(callback) {
@@ -71,7 +71,7 @@ Article.prototype.insertRecord = function(callback) {
   .then(function(data) {
     console.log(data);
     if (callback) callback();
-  })
+  }).catch(function(err){console.error(err)});
 };
 
 Article.prototype.deleteRecord = function(callback) {
@@ -82,7 +82,7 @@ Article.prototype.deleteRecord = function(callback) {
   .then(function(data) {
     console.log(data);
     if (callback) callback();
-  });
+  }).catch(function(err){console.error(err)});;
 };
 
 Article.prototype.updateRecord = function(callback) {
@@ -101,5 +101,5 @@ Article.prototype.updateRecord = function(callback) {
   .then(function(data) {
     console.log(data);
     if (callback) callback();
-  });
+  }).catch(function(err){console.error(err)});;
 };

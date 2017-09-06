@@ -2,6 +2,7 @@
 
 // DONE TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
 const fs = require('fs');
+const pg = require('pg');
 const express = require('express');
 
 // REVIEW: Require in body-parser for post requests in our server. If you want to know more about what this does, read the docs!
@@ -157,8 +158,8 @@ app.delete('/articles', function(request, response) {
   });
 });
 
-// COMMENT: What is this function invocation doing?
-// Put your response here...
+// DONE COMMENT: What is this function invocation doing?
+// loadDB() creates a table called "articles" in the database, then populates it using the loadArticles() function.
 loadDB();
 
 app.listen(PORT, function() {
@@ -169,8 +170,12 @@ app.listen(PORT, function() {
 //////// ** DATABASE LOADER ** ////////
 ////////////////////////////////////////
 function loadArticles() {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // DONE COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? 
+  // 3 & 4
+  //Which method of article.js is interacting with this particular piece of `server.js`? 
+  // None
+  //What part of CRUD is being enacted/managed by this particular piece of code?
+  // Create & Read
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
     // REVIEW: result.rows is an array of objects that Postgres returns as a response to a query.
@@ -191,12 +196,16 @@ function loadArticles() {
         })
       })
     }
-  })
+  }).catch(function(err){console.error(err)});
 }
 
 function loadDB() {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // DONE COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? 
+  // 3 & 4
+  //Which method of article.js is interacting with this particular piece of `server.js`?
+  // None
+  //What part of CRUD is being enacted/managed by this particular piece of code?
+  // Create & Read
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
@@ -212,6 +221,5 @@ function loadDB() {
     })
     .catch(function(err) {
       console.error(err);
-    }
-  );
+    });
 }
